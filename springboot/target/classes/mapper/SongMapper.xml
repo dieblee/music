@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//maybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.mapper.SongMapper">
+    <update id="updateById" parameterType="com.xm.entity.Song">
+        update `song` set id=#{id},singer_id=#{singerId},name=#{name},introduction=#{introduction},create_time=#{createTime},update_time=#{updateTime},pic=#{pic},lytric=#{lytric},url=#{url},address=#{address}   where id = #{id}
+    </update>
+    <select id="selectAll" resultMap="songResult">
+        SELECT s.*, sg.name AS singerName
+        FROM song s
+        LEFT JOIN singer sg ON s.singer_id = sg.id
+        <where>
+            <if test="name != null">AND s.name LIKE concat('%', #{name}, '%')</if>
+        </where>
+    </select>
+    <resultMap id="songResult" type="com.xm.entity.Song">
+        <id column="id" property="id"/>
+        <result column="singer_id" property="singerId"/>
+        <result column="singerName" property="singerName"/> <!-- 这里做字段映射 -->
+    </resultMap>
+    <insert id="insert" parameterType="com.xm.entity.Song">
+        insert into `song` (id,singer_id,name,introduction,create_time,update_time,pic,lytric,url,type,address) values (#{id},#{singerId},#{name},#{introduction},#{createTime},#{updateTime},#{pic},#{lytric},#{url},#{type},#{address})
+    </insert>
+    <select id="selectByNameAndSingerId" resultType="com.xm.entity.Song">
+        SELECT * FROM song WHERE name = #{name} AND singer_id = #{singerId}
+    </select>
+
+</mapper>

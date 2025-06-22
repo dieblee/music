@@ -1,0 +1,278 @@
+declare class CropperCanvas extends CropperElement_2 {
+    static $name: string;
+    static $version: string;
+    protected $onPointerDown: EventListener | null;
+    protected $onPointerMove: EventListener | null;
+    protected $onPointerUp: EventListener | null;
+    protected $onWheel: EventListener | null;
+    protected $wheeling: boolean;
+    protected readonly $pointers: Map<number, any>;
+    protected $style: string;
+    protected $action: string;
+    background: boolean;
+    disabled: boolean;
+    scaleStep: number;
+    themeColor: string;
+    protected static get observedAttributes(): string[];
+    protected connectedCallback(): void;
+    protected disconnectedCallback(): void;
+    protected $propertyChangedCallback(name: string, oldValue: unknown, newValue: unknown): void;
+    protected $bind(): void;
+    protected $unbind(): void;
+    protected $handlePointerDown(event: Event): void;
+    protected $handlePointerMove(event: Event): void;
+    protected $handlePointerUp(event: Event): void;
+    protected $handleWheel(event: Event): void;
+    /**
+     * Changes the current action to a new one.
+     * @param {string} action The new action.
+     * @returns {CropperCanvas} Returns `this` for chaining.
+     */
+    $setAction(action: string): this;
+    /**
+     * Generates a real canvas element, with the image draw into if there is one.
+     * @param {object} [options] The available options.
+     * @param {number} [options.width] The width of the canvas.
+     * @param {number} [options.height] The height of the canvas.
+     * @param {Function} [options.beforeDraw] The function called before drawing the image onto the canvas.
+     * @returns {Promise} Returns a promise that resolves to the generated canvas element.
+     */
+    $toCanvas(options?: {
+        width?: number;
+        height?: number;
+        beforeDraw?: (context: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => void;
+    }): Promise<HTMLCanvasElement>;
+}
+
+declare class CropperElement extends HTMLElement {
+    static $name: string;
+    static $version: string;
+    protected $style?: string;
+    protected $template?: string;
+    protected get $sharedStyle(): string;
+    shadowRootMode: ShadowRootMode;
+    slottable: boolean;
+    themeColor?: string;
+    constructor();
+    protected static get observedAttributes(): string[];
+    protected attributeChangedCallback(name: string, oldValue: string, newValue: string): void;
+    protected $propertyChangedCallback(name: string, oldValue: unknown, newValue: unknown): void;
+    protected connectedCallback(): void;
+    protected disconnectedCallback(): void;
+    protected $getTagNameOf(name: string): string;
+    protected $setStyles(properties: Record<string, any>): this;
+    /**
+     * Outputs the shadow root of the element.
+     * @returns {ShadowRoot} Returns the shadow root.
+     */
+    $getShadowRoot(): ShadowRoot;
+    /**
+     * Adds styles to the shadow root.
+     * @param {string} styles The styles to add.
+     * @returns {CSSStyleSheet|HTMLStyleElement} Returns the generated style sheet.
+     */
+    $addStyles(styles: string): CSSStyleSheet | HTMLStyleElement;
+    /**
+     * Dispatches an event at the element.
+     * @param {string} type The name of the event.
+     * @param {*} [detail] The data passed when initializing the event.
+     * @param {CustomEventInit} [options] The other event options.
+     * @returns {boolean} Returns the result value.
+     */
+    $emit(type: string, detail?: unknown, options?: CustomEventInit): boolean;
+    /**
+     * Defers the callback to be executed after the next DOM update cycle.
+     * @param {Function} [callback] The callback to execute after the next DOM update cycle.
+     * @returns {Promise} A promise that resolves to nothing.
+     */
+    $nextTick(callback?: () => void): Promise<void>;
+    /**
+     * Defines the constructor as a new custom element.
+     * {@link https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/define}
+     * @param {string|object} [name] The element name.
+     * @param {object} [options] The element definition options.
+     */
+    static $define(name?: string | ElementDefinitionOptions, options?: ElementDefinitionOptions): void;
+}
+
+declare class CropperElement_2 extends HTMLElement {
+    static $name: string;
+    static $version: string;
+    protected $style?: string;
+    protected $template?: string;
+    protected get $sharedStyle(): string;
+    shadowRootMode: ShadowRootMode;
+    slottable: boolean;
+    themeColor?: string;
+    constructor();
+    protected static get observedAttributes(): string[];
+    protected attributeChangedCallback(name: string, oldValue: string, newValue: string): void;
+    protected $propertyChangedCallback(name: string, oldValue: unknown, newValue: unknown): void;
+    protected connectedCallback(): void;
+    protected disconnectedCallback(): void;
+    protected $getTagNameOf(name: string): string;
+    protected $setStyles(properties: Record<string, any>): this;
+    /**
+     * Outputs the shadow root of the element.
+     * @returns {ShadowRoot} Returns the shadow root.
+     */
+    $getShadowRoot(): ShadowRoot;
+    /**
+     * Adds styles to the shadow root.
+     * @param {string} styles The styles to add.
+     * @returns {CSSStyleSheet|HTMLStyleElement} Returns the generated style sheet.
+     */
+    $addStyles(styles: string): CSSStyleSheet | HTMLStyleElement;
+    /**
+     * Dispatches an event at the element.
+     * @param {string} type The name of the event.
+     * @param {*} [detail] The data passed when initializing the event.
+     * @param {CustomEventInit} [options] The other event options.
+     * @returns {boolean} Returns the result value.
+     */
+    $emit(type: string, detail?: unknown, options?: CustomEventInit): boolean;
+    /**
+     * Defers the callback to be executed after the next DOM update cycle.
+     * @param {Function} [callback] The callback to execute after the next DOM update cycle.
+     * @returns {Promise} A promise that resolves to nothing.
+     */
+    $nextTick(callback?: () => void): Promise<void>;
+    /**
+     * Defines the constructor as a new custom element.
+     * {@link https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/define}
+     * @param {string|object} [name] The element name.
+     * @param {object} [options] The element definition options.
+     */
+    static $define(name?: string | ElementDefinitionOptions, options?: ElementDefinitionOptions): void;
+}
+
+declare class CropperSelection extends CropperElement {
+    static $name: string;
+    static $version: string;
+    protected $onCanvasAction: EventListener | null;
+    protected $onCanvasActionStart: EventListener | null;
+    protected $onCanvasActionEnd: EventListener | null;
+    protected $onDocumentKeyDown: EventListener | null;
+    protected $action: string;
+    protected $actionStartTarget: EventTarget | null;
+    protected $changing: boolean;
+    protected $style: string;
+    private $initialSelection;
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    aspectRatio: number;
+    initialAspectRatio: number;
+    initialCoverage: number;
+    active: boolean;
+    linked: boolean;
+    dynamic: boolean;
+    movable: boolean;
+    resizable: boolean;
+    zoomable: boolean;
+    multiple: boolean;
+    keyboard: boolean;
+    outlined: boolean;
+    precise: boolean;
+    protected set $canvas(element: CropperCanvas);
+    protected get $canvas(): CropperCanvas;
+    protected static get observedAttributes(): string[];
+    protected $propertyChangedCallback(name: string, oldValue: unknown, newValue: unknown): void;
+    protected connectedCallback(): void;
+    protected disconnectedCallback(): void;
+    protected $getSelections(): CropperSelection[];
+    protected $initSelection(center?: boolean, resize?: boolean): void;
+    protected $createSelection(): CropperSelection;
+    protected $removeSelection(selection?: CropperSelection): void;
+    protected $handleActionStart(event: Event): void;
+    protected $handleAction(event: Event): void;
+    protected $handleActionEnd(): void;
+    protected $handleKeyDown(event: Event): void;
+    /**
+     * Aligns the selection to the center of its parent element.
+     * @returns {CropperSelection} Returns `this` for chaining.
+     */
+    $center(): this;
+    /**
+     * Moves the selection.
+     * @param {number} x The moving distance in the horizontal direction.
+     * @param {number} [y] The moving distance in the vertical direction.
+     * @returns {CropperSelection} Returns `this` for chaining.
+     */
+    $move(x: number, y?: number): this;
+    /**
+     * Moves the selection to a specific position.
+     * @param {number} x The new position in the horizontal direction.
+     * @param {number} [y] The new position in the vertical direction.
+     * @returns {CropperSelection} Returns `this` for chaining.
+     */
+    $moveTo(x: number, y?: number): this;
+    /**
+     * Adjusts the size the selection on a specific side or corner.
+     * @param {string} action Indicates the side or corner to resize.
+     * @param {number} [offsetX] The horizontal offset of the specific side or corner.
+     * @param {number} [offsetY] The vertical offset of the specific side or corner.
+     * @param {number} [aspectRatio] The aspect ratio for computing the new size if it is necessary.
+     * @returns {CropperSelection} Returns `this` for chaining.
+     */
+    $resize(action: string, offsetX?: number, offsetY?: number, aspectRatio?: number): this;
+    /**
+     * Zooms the selection.
+     * @param {number} scale The zoom factor. Positive numbers for zooming in, and negative numbers for zooming out.
+     * @param {number} [x] The zoom origin in the horizontal, defaults to the center of the selection.
+     * @param {number} [y] The zoom origin in the vertical, defaults to the center of the selection.
+     * @returns {CropperSelection} Returns `this` for chaining.
+     */
+    $zoom(scale: number, x?: number, y?: number): this;
+    /**
+     * Changes the position and/or size of the selection.
+     * @param {number} x The new position in the horizontal direction.
+     * @param {number} y The new position in the vertical direction.
+     * @param {number} [width] The new width.
+     * @param {number} [height] The new height.
+     * @param {number} [aspectRatio] The new aspect ratio for this change only.
+     * @param {number} [_force] Force change.
+     * @returns {CropperSelection} Returns `this` for chaining.
+     */
+    $change(x: number, y: number, width?: number, height?: number, aspectRatio?: number, _force?: boolean): this;
+    /**
+     * Resets the selection to its initial position and size.
+     * @returns {CropperSelection} Returns `this` for chaining.
+     */
+    $reset(): this;
+    /**
+     * Clears the selection.
+     * @returns {CropperSelection} Returns `this` for chaining.
+     */
+    $clear(): this;
+    /**
+     * Refreshes the position or size of the selection.
+     * @returns {CropperSelection} Returns `this` for chaining.
+     */
+    $render(): this;
+    /**
+     * Generates a real canvas element, with the image (selected area only) draw into if there is one.
+     * @param {object} [options] The available options.
+     * @param {number} [options.width] The width of the canvas.
+     * @param {number} [options.height] The height of the canvas.
+     * @param {Function} [options.beforeDraw] The function called before drawing the image onto the canvas.
+     * @returns {Promise} Returns a promise that resolves to the generated canvas element.
+     */
+    $toCanvas(options?: {
+        width?: number;
+        height?: number;
+        beforeDraw?: (context: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => void;
+    }): Promise<HTMLCanvasElement>;
+}
+export default CropperSelection;
+
+declare interface Selection_2 {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+}
+export { Selection_2 as Selection }
+
+export { }

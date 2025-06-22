@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//maybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.mapper.SongListMapper">
+    <update id="updateById" parameterType="com.xm.entity.SongList">
+        update `song_list` set id=#{id},title=#{title},pic=#{pic},introduction=#{introduction},style=#{style},create_id=#{createId}   where id = #{id}
+    </update>
+    <select id="selectAll" resultMap="songListResult">
+        select DISTINCT sl.*,cs.username,cs.avator, c.content,ls.song_id
+        FROM music.song_list sl
+        LEFT JOIN music.consumer cs ON sl.create_id = cs.id
+        LEFT JOIN music.comment c ON sl.id = c.song_list_id
+        LEFT JOIN music.list_song ls ON sl.id = ls.song_list_id
+        <where>
+            <if test="title != null">AND sl.title LIKE concat('%',#{title},'%')</if>
+            <if test="id != null">AND sl.id = #{id}</if>
+        </where>
+    </select>
+    <resultMap id="songListResult" type="com.xm.entity.SongList">
+        <id column="id" property="id"/>
+        <result column="avator" property="avator"/>
+        <result column="username" property="username"/>
+        <result column="content" property="content"/>
+        <result column="song_id" property="song_id"/><!-- 这里做字段映射 -->
+    </resultMap>
+    <select id="selectSongList" resultMap="Result">
+        select sl.*,cs.username
+        FROM music.song_list sl
+        LEFT JOIN music.consumer cs on sl.create_id = cs.id
+    </select>
+    <resultMap id="Result" type="com.xm.entity.SongList">
+        <id column="id" property="id"/>
+        <result column="avator" property="avator"/>
+        <result column="username" property="username"/>
+        <result column="content" property="content"/>
+        <result column="song_id" property="song_id"/><!-- 这里做字段映射 -->
+    </resultMap>
+    <insert id="insert" parameterType="com.xm.entity.SongList">
+        insert into `song_list` (id,title,pic,introduction,style,create_id) values (#{id},#{title},#{pic},#{introduction},#{style},#{createId})
+    </insert>
+
+</mapper>

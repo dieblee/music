@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//maybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.mapper.ConsumerMapper">
+    <update id="updateById" parameterType="com.xm.entity.Consumer">
+        update `consumer` set id=#{id},username=#{username},password=#{password},sex=#{sex},phone_num=#{phoneNum},email=#{email},birth=#{birth},introduction=#{introduction},location=#{location},avator=#{avator},create_time=#{createTime},update_time=#{updateTime}  where id = #{id}
+    </update>
+    <update id="updateTime" parameterType="com.xm.entity.Consumer">
+        update `consumer` set update_time=#{updateTime}  where username = #{username}
+    </update>
+    <select id="selectAll" resultType="com.xm.entity.Consumer">
+        select * from music.consumer
+        <where>
+            <if test="username !=null" >username like concat('%',#{username},'%')</if>
+            <if test="id !=null" >id = #{id}</if>
+        </where>
+    </select>
+    <insert id="insert" parameterType="com.xm.entity.Consumer">
+        insert into `consumer` (id,username,password,sex,phone_num,email,birth,introduction,location,avator,create_time,update_time) values (#{id},#{username},#{password},#{sex},#{phoneNum},#{email},#{birth},#{introduction},#{location},#{avator},#{createTime},#{updateTime})
+    </insert>
+
+
+</mapper>

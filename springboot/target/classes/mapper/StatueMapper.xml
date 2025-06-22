@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//maybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.mapper.StatueMapper">
+    <update id="updateById" parameterType="com.xm.entity.Statue">
+        update `statue` set id=#{id},send_id=#{sendId},receive_id=#{receiveId},statue=#{statue} where id = #{id}
+    </update>
+    <select id="selectAll" resultType="com.xm.entity.Statue">
+        select * from statue
+        <where>
+            <if test="send_id !=null" >send_id = #{send_id}</if>
+        </where>
+    </select>
+    <insert id="insert" parameterType="com.xm.entity.Statue">
+        insert into `statue` (id,send_id,receive_id,statue) values (#{id},#{sendId},#{receiveId},#{statue})
+    </insert>
+
+
+</mapper>

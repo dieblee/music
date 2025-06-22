@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "element-plus": "^2.9.5",
+    "lodash-es": "^4.17.21"
+  }
+}

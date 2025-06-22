@@ -1,0 +1,66 @@
+declare class CropperElement extends HTMLElement {
+    static $name: string;
+    static $version: string;
+    protected $style?: string;
+    protected $template?: string;
+    protected get $sharedStyle(): string;
+    shadowRootMode: ShadowRootMode;
+    slottable: boolean;
+    themeColor?: string;
+    constructor();
+    protected static get observedAttributes(): string[];
+    protected attributeChangedCallback(name: string, oldValue: string, newValue: string): void;
+    protected $propertyChangedCallback(name: string, oldValue: unknown, newValue: unknown): void;
+    protected connectedCallback(): void;
+    protected disconnectedCallback(): void;
+    protected $getTagNameOf(name: string): string;
+    protected $setStyles(properties: Record<string, any>): this;
+    /**
+     * Outputs the shadow root of the element.
+     * @returns {ShadowRoot} Returns the shadow root.
+     */
+    $getShadowRoot(): ShadowRoot;
+    /**
+     * Adds styles to the shadow root.
+     * @param {string} styles The styles to add.
+     * @returns {CSSStyleSheet|HTMLStyleElement} Returns the generated style sheet.
+     */
+    $addStyles(styles: string): CSSStyleSheet | HTMLStyleElement;
+    /**
+     * Dispatches an event at the element.
+     * @param {string} type The name of the event.
+     * @param {*} [detail] The data passed when initializing the event.
+     * @param {CustomEventInit} [options] The other event options.
+     * @returns {boolean} Returns the result value.
+     */
+    $emit(type: string, detail?: unknown, options?: CustomEventInit): boolean;
+    /**
+     * Defers the callback to be executed after the next DOM update cycle.
+     * @param {Function} [callback] The callback to execute after the next DOM update cycle.
+     * @returns {Promise} A promise that resolves to nothing.
+     */
+    $nextTick(callback?: () => void): Promise<void>;
+    /**
+     * Defines the constructor as a new custom element.
+     * {@link https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/define}
+     * @param {string|object} [name] The element name.
+     * @param {object} [options] The element definition options.
+     */
+    static $define(name?: string | ElementDefinitionOptions, options?: ElementDefinitionOptions): void;
+}
+
+declare class CropperHandle extends CropperElement {
+    static $name: string;
+    static $version: string;
+    protected $onCanvasCropEnd: EventListener | null;
+    protected $onCanvasCropStart: EventListener | null;
+    protected $style: string;
+    action: string;
+    plain: boolean;
+    slottable: boolean;
+    themeColor: string;
+    protected static get observedAttributes(): string[];
+}
+export default CropperHandle;
+
+export { }

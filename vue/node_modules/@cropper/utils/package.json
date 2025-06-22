@@ -1,0 +1,64 @@
+{
+  "name": "@cropper/utils",
+  "version": "2.0.0",
+  "description": "A series of common constants and utility functions for Cropper.",
+  "main": "dist/utils.raw.js",
+  "module": "dist/utils.esm.raw.js",
+  "types": "dist/utils.d.ts",
+  "unpkg": "dist/utils.js",
+  "jsdelivr": "dist/utils.js",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/utils.d.ts",
+        "node": {
+          "production": "./dist/utils.esm.min.js",
+          "development": "./dist/utils.esm.js",
+          "default": "./dist/utils.esm.raw.js"
+        },
+        "default": "./dist/utils.esm.raw.js"
+      },
+      "require": {
+        "types": "./dist/utils.d.ts",
+        "node": {
+          "production": "./dist/utils.min.js",
+          "development": "./dist/utils.js",
+          "default": "./utils.raw.js"
+        },
+        "default": "./dist/utils.raw.js"
+      }
+    }
+  },
+  "scripts": {
+    "api-extractor": "api-extractor run --local --verbose",
+    "build": "npm run tsc && npm run api-extractor && npm run rollup",
+    "clean": "del-cli dist .temp",
+    "release": "npm run clean && npm run build",
+    "rollup": "rollup -c ../../rollup.config.js",
+    "tsc": "tsc --outDir ./.temp --declaration --emitDeclarationOnly"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fengyuanchen/cropperjs.git",
+    "directory": "packages/utils"
+  },
+  "keywords": [
+    "utils",
+    "utilities",
+    "constants",
+    "functions",
+    "cropper",
+    "cropper.js"
+  ],
+  "author": "Chen Fengyuan (https://chenfengyuan.com/)",
+  "license": "MIT",
+  "bugs": "https://github.com/fengyuanchen/cropperjs/issues",
+  "homepage": "https://github.com/fengyuanchen/cropperjs/tree/main/packages/utils/#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "08a3d16f2ec4a14a0c811aebc204016e13c3d2a5"
+}

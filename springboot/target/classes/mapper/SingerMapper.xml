@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//maybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.mapper.SingerMapper">
+    <update id="updateById" parameterType="com.xm.entity.Singer">
+        update `singer` set id=#{id},name=#{name},sex=#{sex},pic=#{pic},birth=#{birth},location=#{location},introduction=#{introduction},type=#{type} where id = #{id}
+    </update>
+    <update id="updateName" parameterType="com.xm.entity.Singer">
+        update `singer` set name=#{newname} where name = #{oldname}
+    </update>
+    <select id="selectAll" resultType="com.xm.entity.Singer">
+        select * from music.singer
+        <where>
+            <if test="name !=null" >name like concat('%',#{name},'%')</if>
+        </where>
+    </select>
+    <select id="groupByType" resultType="com.xm.entity.Singer">
+        SELECT type, COUNT(*) as count FROM music.singer GROUP BY type;
+    </select>
+    <insert id="insert" parameterType="com.xm.entity.Singer">
+        insert into `singer` (id,name,sex,birth,location,introduction,pic,type) values (#{id},#{name},#{sex},#{birth},#{location},#{introduction},#{pic},#{type})
+    </insert>
+
+</mapper>

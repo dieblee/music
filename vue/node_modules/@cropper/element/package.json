@@ -1,0 +1,67 @@
+{
+  "name": "@cropper/element",
+  "version": "2.0.0",
+  "description": "An abstract class for constructing Cropper elements.",
+  "main": "dist/element.raw.js",
+  "module": "dist/element.esm.raw.js",
+  "types": "dist/element.d.ts",
+  "unpkg": "dist/element.js",
+  "jsdelivr": "dist/element.js",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/element.d.ts",
+        "node": {
+          "production": "./dist/element.esm.min.js",
+          "development": "./dist/element.esm.js",
+          "default": "./dist/element.esm.raw.js"
+        },
+        "default": "./dist/element.esm.raw.js"
+      },
+      "require": {
+        "types": "./dist/element.d.ts",
+        "node": {
+          "production": "./dist/element.min.js",
+          "development": "./dist/element.js",
+          "default": "./element.raw.js"
+        },
+        "default": "./dist/element.raw.js"
+      }
+    }
+  },
+  "scripts": {
+    "api-extractor": "api-extractor run --local --verbose",
+    "build": "npm run tsc && npm run api-extractor && npm run rollup",
+    "clean": "del-cli dist .temp",
+    "release": "npm run clean && npm run build",
+    "rollup": "rollup -c ../../rollup.config.js",
+    "tsc": "tsc --outDir ./.temp --declaration --emitDeclarationOnly"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fengyuanchen/cropperjs.git",
+    "directory": "packages/element"
+  },
+  "keywords": [
+    "element",
+    "cropper",
+    "cropper.js",
+    "cropper-element",
+    "custom-element",
+    "web-component"
+  ],
+  "author": "Chen Fengyuan (https://chenfengyuan.com/)",
+  "license": "MIT",
+  "bugs": "https://github.com/fengyuanchen/cropperjs/issues",
+  "homepage": "https://github.com/fengyuanchen/cropperjs/tree/main/packages/element/#readme",
+  "dependencies": {
+    "@cropper/utils": "^2.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "08a3d16f2ec4a14a0c811aebc204016e13c3d2a5"
+}

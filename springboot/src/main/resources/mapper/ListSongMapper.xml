@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//maybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.mapper.ListSongMapper">
+    <update id="updateById" parameterType="com.xm.entity.ListSong">
+        update `list_song` set id=#{id},song_id=#{song_id},song_list_id=#{song_list_id} where id = #{id}
+    </update>
+    <select id="selectAll" resultMap="listSongResult">
+        select ls.*,s.name as songName,s.pic,s.url,s.singer_id,s.introduction,si.name as singerName
+        from music.list_song ls
+        Left Join `song` s on ls.song_id = s.id
+        Left Join `singer` si on s.singer_id = si.id  <!-- 连接 singer 表 -->
+        <where>
+            <if test="name != null">AND s.name like concat('%', #{name}, '%')</if>
+            <if test="song_list_id != null">AND ls.song_list_id = #{song_list_id}</if>
+        </where>
+    </select>
+    <resultMap id="listSongResult" type="com.xm.entity.ListSong">
+        <id column="id" property="id"/>
+        <result column="song_id" property="song_id"/>
+        <result column="songName" property="name"/> <!-- 歌曲名称 -->
+        <result column="pic" property="pic"/>
+        <result column="url" property="url"/>
+        <result column="singerName" property="singerName"/> <!-- 获取歌手名称 -->
+        <result column="introduction" property="introduction"/>
+    </resultMap>
+    <insert id="insert" parameterType="com.xm.entity.ListSong">
+        insert into `list_song` (song_id,song_list_id) values (#{song_id},#{song_list_id})
+    </insert>
+
+
+</mapper>

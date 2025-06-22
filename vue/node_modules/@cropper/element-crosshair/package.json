@@ -1,0 +1,68 @@
+{
+  "name": "@cropper/element-crosshair",
+  "version": "2.0.0",
+  "description": "A custom crosshair element for the Cropper.",
+  "main": "dist/element-crosshair.raw.js",
+  "module": "dist/element-crosshair.esm.raw.js",
+  "types": "dist/element-crosshair.d.ts",
+  "unpkg": "dist/element-crosshair.js",
+  "jsdelivr": "dist/element-crosshair.js",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/element-crosshair.d.ts",
+        "node": {
+          "production": "./dist/element-crosshair.esm.min.js",
+          "development": "./dist/element-crosshair.esm.js",
+          "default": "./dist/element-crosshair.esm.raw.js"
+        },
+        "default": "./dist/element-crosshair.esm.raw.js"
+      },
+      "require": {
+        "types": "./dist/element-crosshair.d.ts",
+        "node": {
+          "production": "./dist/element-crosshair.min.js",
+          "development": "./dist/element-crosshair.js",
+          "default": "./element-crosshair.raw.js"
+        },
+        "default": "./dist/element-crosshair.raw.js"
+      }
+    }
+  },
+  "scripts": {
+    "api-extractor": "api-extractor run --local --verbose",
+    "build": "npm run tsc && npm run api-extractor && npm run rollup",
+    "clean": "del-cli dist .temp",
+    "release": "npm run clean && npm run build",
+    "rollup": "rollup -c ../../rollup.config.js",
+    "tsc": "tsc --outDir ./.temp --declaration --emitDeclarationOnly"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fengyuanchen/cropperjs.git",
+    "directory": "packages/element-crosshair"
+  },
+  "keywords": [
+    "crosshair",
+    "cropper",
+    "cropper.js",
+    "cropper-element",
+    "custom-element",
+    "web-component"
+  ],
+  "author": "Chen Fengyuan (https://chenfengyuan.com/)",
+  "license": "MIT",
+  "bugs": "https://github.com/fengyuanchen/cropperjs/issues",
+  "homepage": "https://github.com/fengyuanchen/cropperjs/tree/main/packages/element-crosshair/#readme",
+  "dependencies": {
+    "@cropper/element": "^2.0.0",
+    "@cropper/utils": "^2.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "08a3d16f2ec4a14a0c811aebc204016e13c3d2a5"
+}

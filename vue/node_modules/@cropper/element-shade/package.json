@@ -1,0 +1,70 @@
+{
+  "name": "@cropper/element-shade",
+  "version": "2.0.0",
+  "description": "A custom shade element for the Cropper.",
+  "main": "dist/element-shade.raw.js",
+  "module": "dist/element-shade.esm.raw.js",
+  "types": "dist/element-shade.d.ts",
+  "unpkg": "dist/element-shade.js",
+  "jsdelivr": "dist/element-shade.js",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/element-shade.d.ts",
+        "node": {
+          "production": "./dist/element-shade.esm.min.js",
+          "development": "./dist/element-shade.esm.js",
+          "default": "./dist/element-shade.esm.raw.js"
+        },
+        "default": "./dist/element-shade.esm.raw.js"
+      },
+      "require": {
+        "types": "./dist/element-shade.d.ts",
+        "node": {
+          "production": "./dist/element-shade.min.js",
+          "development": "./dist/element-shade.js",
+          "default": "./element-shade.raw.js"
+        },
+        "default": "./dist/element-shade.raw.js"
+      }
+    }
+  },
+  "scripts": {
+    "api-extractor": "api-extractor run --local --verbose",
+    "build": "npm run tsc && npm run api-extractor && npm run rollup",
+    "clean": "del-cli dist .temp",
+    "release": "npm run clean && npm run build",
+    "rollup": "rollup -c ../../rollup.config.js",
+    "tsc": "tsc --outDir ./.temp --declaration --emitDeclarationOnly"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fengyuanchen/cropperjs.git",
+    "directory": "packages/element-shade"
+  },
+  "keywords": [
+    "shade",
+    "cropper",
+    "cropper.js",
+    "cropper-element",
+    "custom-element",
+    "web-component"
+  ],
+  "author": "Chen Fengyuan (https://chenfengyuan.com/)",
+  "license": "MIT",
+  "bugs": "https://github.com/fengyuanchen/cropperjs/issues",
+  "homepage": "https://github.com/fengyuanchen/cropperjs/tree/main/packages/element-shade/#readme",
+  "dependencies": {
+    "@cropper/element": "^2.0.0",
+    "@cropper/element-canvas": "^2.0.0",
+    "@cropper/element-selection": "^2.0.0",
+    "@cropper/utils": "^2.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "08a3d16f2ec4a14a0c811aebc204016e13c3d2a5"
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//maybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.mapper.CommentMapper">
+    <update id="updateById" parameterType="com.xm.entity.Comment">
+        update `comment` set user_id=#{userId},song_id=#{songId},song_list_id=#{songListId},content=#{content},up=#{up},create_time=#{createTime} where id = #{id}
+    </update>
+    <select id="selectAll" resultType="com.xm.entity.Comment">
+        select * from music.comment
+        <where>
+            <if test="name !=null" >name like concat('%',#{name},'%')</if>
+        </where>
+    </select>
+    <insert id="insert" parameterType="com.xm.entity.Comment">
+        insert into `comment` (id,user_id,song_id,song_list_id,content,create_time,up) values (#{id},#{userId},#{songId},#{songListId},#{content},#{createTime},#{up})
+    </insert>
+
+
+</mapper>

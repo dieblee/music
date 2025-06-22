@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//maybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.mapper.StatisticMapper">
+    <update id="updateById" parameterType="com.xm.entity.Statistic">
+        update `statistic` set id=#{id},song_id=#{songId},song_list_id=#{songListId},date=#{date}  where id = #{id}
+    </update>
+    <select id="selectAll" resultType="com.xm.entity.Statistic">
+        select * from music.statistic
+    </select>
+    <insert id="insert" parameterType="com.xm.entity.Statistic">
+        insert into `statistic` (id,song_id,song_list_id,date,click) values (#{id},#{songId},#{songListId},#{date},#{click})
+    </insert>
+
+
+</mapper>

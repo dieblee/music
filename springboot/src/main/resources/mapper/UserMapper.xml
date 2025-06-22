@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//maybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.mapper.EmmMapper">
+    <update id="updateById" parameterType="com.xm.entity.User">
+        update `admin` set id=#{id},name=#{name},password=#{password},role=#{role},avator=#{avator} where id = #{id}
+    </update>
+    <select id="selectAll" resultType="com.xm.entity.User">
+        select * from admin
+        <where>
+            <if test="name !=null" >id like concat('%',#{name},'%')</if>
+        </where>
+    </select>
+    <insert id="insert" parameterType="com.xm.entity.User">
+        insert into `admin` (id,name,password,role,avator) values (#{id},#{name},#{password},#{role},#{avator})
+    </insert>
+
+
+</mapper>

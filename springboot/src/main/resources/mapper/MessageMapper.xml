@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//maybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.mapper.MessageMapper">
+    <update id="updateById" parameterType="com.xm.entity.Message">
+        update `message` set id=#{id},send_id=#{sendId},receive_id=#{receiveId},content=#{content} where id = #{id}
+    </update>
+    <select id="selectAll" resultMap="messageResult">
+        select m.*,
+               cs1.username as send_username,
+               cs2.username as receive_username
+        FROM music.message m
+                 LEFT JOIN music.consumer cs1 ON m.send_id = cs1.id
+                 LEFT JOIN music.consumer cs2 ON m.receive_id = cs2.id
+    </select>
+    <resultMap id="messageResult" type="com.xm.entity.Message">
+        <result column="send_username" property="sendName"/>
+        <result column="receive_username" property="receiveName"/>
+    </resultMap>
+    <insert id="insert" parameterType="com.xm.entity.Message">
+        insert into `message` (id,send_id,receive_id,content) values (#{id},#{sendId},#{receiveId},#{content})
+    </insert>
+
+
+</mapper>
