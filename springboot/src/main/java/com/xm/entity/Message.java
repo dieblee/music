@@ -12,6 +12,25 @@ public class Message {
     private String sendName;
     private String receiveName;
 
+    private String nickname; // 新增
+    private String time;
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
     public Integer getId() {
         return id;
     }

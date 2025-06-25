@@ -9,10 +9,8 @@
             <span class="rank">{{ index + 1 }}</span>
             <img :src="item.songPic" class="list-img"  />
             <div style="display: flex;flex-direction: column;width: 100px;margin-right: 40px">
-              <span style="font-family: 'Segoe UI';font-size: 20px" >{{item.songTitle}}</span>
-              <span style="font-family: 'Segoe UI';font-size: 12px;font-weight: 20">{{item.singerName}}</span>
+              <span style="font-family: 'Segoe UI';font-size: 20px" >{{item.name}}</span>
             </div>
-            <span class="hot">{{ item.click }}</span>
           </div>
         </div>
       </div>
@@ -64,10 +62,10 @@ const data = reactive({
 });
 
 const loadSong = () => {
-  request.get("/statistic/rankSong").then((res) => {
-    if (res.code === "200") {
-      data.songData = res.data;
-      console.log(data.songData)
+  request.get("/redis/rankSong").then((res) => {
+    console.log("返回排行榜数据：", res);
+    if (res != null) {
+      data.songData = res;
     } else {
       ElMessage.error(`加载歌曲排行榜失败: ${res.msg || "未知错误"}`);
     }
@@ -80,7 +78,6 @@ const loadSongList = () => {
   request.get("/statistic/rankSongList").then((res) => {
     if (res.code === "200") {
       data.songListData = res.data;
-      console.log(data.songListData)
     } else {
       ElMessage.error(`加载歌单排行榜失败: ${res.msg || "未知错误"}`);
     }
@@ -93,7 +90,6 @@ const loadSinger = () => {
   request.get("/statistic/rankSinger").then((res) => {
     if (res.code === "200") {
       data.singerData = res.data;
-      console.log(data.singerData);
     } else {
       ElMessage.error(`加载歌手排行榜失败: ${res.msg || "未知错误"}`);
     }

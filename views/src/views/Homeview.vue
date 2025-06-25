@@ -209,6 +209,8 @@ const changeState = async (url, name, pic, id) => {
   //store.commit('setListOfSongs', { url, id });
   const currentDate = dayjs().format("YYYY-MM-DD");
   try {
+    await incrementRedisClick(id);
+
     const response = await request.get(`/statistic/getClickDate/${id}`);
     console.log("API Response:", response);
     if (response.clickDate) {
@@ -237,6 +239,15 @@ const changeState = async (url, name, pic, id) => {
   }
 };
 
+async function incrementRedisClick(songId) {
+  try {
+    await request.post('/redis/incrementClick', { songId });
+    console.log("Redis 点击增加成功");
+  } catch (err) {
+    console.error("Redis 增加点击失败:", err);
+    throw err;
+  }
+}
 
 const loadSwipers = () => {
   request.get("/swiper/selectAll")

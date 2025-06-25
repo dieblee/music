@@ -24,7 +24,13 @@ const router = createRouter({
         {path: 'songlist', name: 'songlist',meta:{title:"当前歌单"}, component: () => import('../views/SongList.vue'),children:[
                 {path: 'songlistselect', name: 'songlistselect',meta:{title:"歌曲列表"}, component: () => import('../views/Songlistselect.vue')},
                 {path: 'songlistcontent', name: 'songlistcontent',meta:{title:"歌单评论"}, component: () => import('../views/Songlistcontent.vue')},
-            ]}
+            ]},
+            {
+                path: '/chat/:id',
+                name: 'ChatPage',
+                meta: { title: '聊天页面' },
+                component: () => import('../views/ChatPage.vue')
+            }
       ]
     },
   ],

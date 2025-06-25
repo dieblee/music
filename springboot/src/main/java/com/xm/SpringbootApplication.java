@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.xm.mapper")
+@MapperScan("com.xm")
 public class SpringbootApplication {
 
 	public static void main(String[] args) {

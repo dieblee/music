@@ -140,6 +140,7 @@ const load = () => {
 
 const changeStatue = (id) => {
   const consumerInfo = JSON.parse(localStorage.getItem('consumerInfo'));
+  router.push(`/chat/${id}`);
   request.post("/statue/add", {
     sendId: consumerInfo.id,
     receiveId: id,
